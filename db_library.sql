@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 21, 2023 at 07:32 PM
+-- Generation Time: Jan 21, 2023 at 08:04 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -66,6 +66,7 @@ CREATE TABLE `tb_borrow_book` (
 
 INSERT INTO `tb_borrow_book` (`br_date_br`, `br_date_rt`, `b_id`, `m_user`, `br_fine`) VALUES
 ('2023-01-01', '2023-01-10', 'B00001', 'member02', 45),
+('2023-01-22', '0000-00-00', 'B00002', 'member05', 0),
 ('2023-01-22', '2023-01-22', 'B00003', 'member05', 54);
 
 -- --------------------------------------------------------
@@ -106,8 +107,7 @@ ALTER TABLE `tb_book`
 -- Indexes for table `tb_borrow_book`
 --
 ALTER TABLE `tb_borrow_book`
-  ADD PRIMARY KEY (`br_date_br`),
-  ADD KEY `b_id` (`b_id`),
+  ADD PRIMARY KEY (`b_id`,`br_date_br`),
   ADD KEY `m_user` (`m_user`);
 
 --
@@ -125,7 +125,8 @@ ALTER TABLE `tb_member`
 --
 ALTER TABLE `tb_borrow_book`
   ADD CONSTRAINT `tb_borrow_book_ibfk_1` FOREIGN KEY (`b_id`) REFERENCES `tb_book` (`b_id`),
-  ADD CONSTRAINT `tb_borrow_book_ibfk_2` FOREIGN KEY (`m_user`) REFERENCES `tb_member` (`m_user`);
+  ADD CONSTRAINT `tb_borrow_book_ibfk_2` FOREIGN KEY (`m_user`) REFERENCES `tb_member` (`m_user`),
+  ADD CONSTRAINT `tb_borrow_book_ibfk_3` FOREIGN KEY (`b_id`) REFERENCES `tb_book` (`b_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
