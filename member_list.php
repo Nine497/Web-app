@@ -1,18 +1,19 @@
-<?php 
+<?php
 include("condb.php");
 
-if(isset($_POST['keyword'])) {
+if (isset($_POST['keyword'])) {
     $keyword = $_POST['keyword'];
 } else {
     $keyword = '';
 }
 
 $query_borrow = "SELECT tb_borrow_book.*, tb_book.b_name, tb_member.m_name FROM tb_borrow_book
-                  JOIN tb_book ON tb_borrow_book.b_id = tb_book.b_id
-                  JOIN tb_member ON tb_borrow_book.m_user = tb_member.m_user
-                  WHERE tb_book.b_name LIKE '%$keyword%' OR tb_member.m_name LIKE '%$keyword%'
-                  " or die("Error:" . mysqli_error());
-$result = mysqli_query($con, $query_borrow);?>
+              JOIN tb_book ON tb_borrow_book.b_id = tb_book.b_id
+              JOIN tb_member ON tb_borrow_book.m_user = tb_member.m_user
+              WHERE tb_book.b_name LIKE '%$keyword%' OR tb_member.m_name LIKE '%$keyword%' OR tb_book.b_id LIKE '%$keyword%'
+              " or die("Error:" . mysqli_error());
+
+$result = mysqli_query($con, $query_borrow); ?>
 
 <div class="row">
     <div class="col-8" style="  margin-left: auto; margin-right: auto;">

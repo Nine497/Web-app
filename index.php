@@ -255,7 +255,7 @@
     $(document).on('click', '#btn2', function () {
         var b_id = $('.book-id1').text();
         var fine = $('#fine').val();
-
+        if (b_id != '' && fine != ''){
         $.ajax({
             type: 'POST',
             url: 'return_db.php',
@@ -271,7 +271,9 @@
                 console.log(textStatus, errorThrown);
             }
         });
-
+    }else{
+        alert('กรุณากรอกข้อมูลให้ครบทุกช่องก่อนทำการบันทึก');
+    }
     });
 </script>
 
